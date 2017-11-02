@@ -1,0 +1,26 @@
+{
+  "name": "ttd1",
+  "version": "1.0.0",
+  "description": "ttd scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "babel-node item.test"
+  },
+  "author": "sam.he@cargosmart.com",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "7",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-node6": "^11.0.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "3.x",
+    "mocha": "^4.0.1"
+  }
+}
