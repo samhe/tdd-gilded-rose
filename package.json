@@ -21,6 +21,7 @@
     "babel-preset-node6": "^11.0.0",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "3.x",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "should": "^13.1.3"
   }
 }

@@ -2,5 +2,6 @@
 
 ## Teck Stack
 - babel
-- lodash
+- should
 - mocha
+- lodash
