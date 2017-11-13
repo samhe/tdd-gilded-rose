@@ -5,3 +5,14 @@
 - should
 - mocha
 - lodash
+- gulp
+- gulp-mocha
+- code coverage: gulp-istanbul, isparta
+
+## How to run
+
+```javascripts
+npm install //or yarn install
+npm run test
+npm run coverage
+```
