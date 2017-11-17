@@ -86,23 +86,27 @@ function getDataAggrQuery(latestBatches) {
 }
 
 exports.search = function(req, res) {
-  Typhoon.aggregate(latestBatchQuery).exec(function(err, data) {
+  let returnResult = function(err, result) {
     if(err) {
       console.log('[Typhoon] getLatestBatch error.', err);
       return res.json([]);
+    } else {
+      return res.json(result);
     }
-    let latestBatches = _.get(data[0], 'result');
+  };
+
+  Typhoon.aggregate(latestBatchQuery).exec(function(err, latestBatchQueryResult) {
+    if(err) {
+      returnResult(err, []);
+    }
+    let latestBatches = _.get(latestBatchQueryResult[0], 'result');
     if(!_.isEmpty(latestBatches)) {
       let query = getDataAggrQuery(latestBatches);
-      Typhoon.aggregate(query).exec(function(err, data) {
-        if(err) {
-          console.log('[Typhoon] dataAggregation error.', err);
-          return res.json([]);
-        }
-        res.json(data);
+      Typhoon.aggregate(query).exec(function(err, dataAggrResult) {
+        returnResult(err, dataAggrResult);
       });
     } else {
-      res.json([]);
+      returnResult(null, []);
     }
   });
-}
+};
