@@ -85,20 +85,21 @@ function getDataAggrQuery(latestBatches) {
   return dataAggrQuery;
 }
 
-let getTheLatestBatchs = function() {
-  return Typhoon.aggregate(latestBatchQuery);
+let getTheLatestBatchs = function* () {
+  return yield Typhoon.aggregate(latestBatchQuery);
 };
 
-let getTheLatestTyphoonByBatchNos = function(latestBatchQueryResult) {
+let getTheLatestTyphoonByBatchNos = function* (latestBatchQueryResult) {
   let latestBatches = _.get(latestBatchQueryResult[0], 'result');
   if(!_.isEmpty(latestBatches)) {
     let query = getDataAggrQuery(latestBatches);
-    return Typhoon.aggregate(query);
+    return yield Typhoon.aggregate(query);
   } else {
-    return new Promise((resolve, reject) => { resolve([]); });
+    return [];
   }
 };
 
-exports.getTheLatestTyphoon = function() {
-  return getTheLatestBatchs().then(getTheLatestTyphoonByBatchNos);
+exports.getTheLatestTyphoon = function* () {
+  let latestBatchQueryResult = yield getTheLatestBatchs();
+  return yield getTheLatestTyphoonByBatchNos(latestBatchQueryResult);
 };
