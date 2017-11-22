@@ -37,6 +37,6 @@ gulp.task('server', server);
 gulp.task('test', test);
 gulp.task('coverage', coverage);
 gulp.task('exit', () => { getServer().getInstance().close(); process.exit(); });
-gulp.task('t:s', (done) => {
+gulp.task('t:s', done => {
   runSequence('server', 'test', 'exit', done);
 });
