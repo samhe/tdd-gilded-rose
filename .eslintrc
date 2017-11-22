@@ -3,7 +3,12 @@
   "env": {
     "es6": true
   },
-  "globals": {},
+  "globals": {
+    "console": true,
+    "global": true,
+    "process": true,
+    "require": true
+  },
   "plugins": [],
   "rules": {
     //Possible Errors
