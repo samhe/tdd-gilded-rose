@@ -8,7 +8,10 @@
     "global": true,
     "process": true,
     "require": true,
-    "exports": true
+    "exports": true,
+    "it": true,
+    "describe": true,
+    "before": true
   },
   "plugins": [],
   "rules": {

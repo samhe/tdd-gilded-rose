@@ -16,7 +16,7 @@ const mongoose = require('mongoose');
 const Typhoon = mongoose.model('typhoon');
 
 describe('Typhoon Data Query Test', () => {
-  before('init request', (done) => {
+  before('init request', done => {
     require('../server/route/typhoon.server.route')(app);
     let docs = require('./data/typhoon.data');
     Typhoon.remove({}, () => {
@@ -25,11 +25,12 @@ describe('Typhoon Data Query Test', () => {
       });
     });
   });
-  it('Typhoon search result should equal to the expected.', (done) => {
+  it('Typhoon search result should equal to the expected.', done => {
     axios.get('http://localhost:3000/api/typhoon?ID=12345')
-      .then(function (response) {
+      .then(function(response) {
         let expectedResult = require('./data/typhoon.result.data');
         should.equal(response.data.length, expectedResult.length);
+        should.equal(response.data[0].TIMEDAY, expectedResult[0].TIMEDAY);
         done();
       });
   });
