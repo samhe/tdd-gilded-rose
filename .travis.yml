@@ -12,3 +12,8 @@ notifications:
       - sam.he@cargosmart.com
     on_success: change # default: change
     on_failure: always # default: always
+
+cache: yarn
+  yarn: true
+  directories:
+    - node_modules
