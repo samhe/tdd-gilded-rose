@@ -7,7 +7,16 @@ import runSequence from 'run-sequence';
 import { getServer } from './modules/_express/server/server';
 
 const srcFiles = ['modules/*/server/**/*.js'];
-const testFiles = ['modules/*/test/**/*.test.js'];
+const allTestFiles = ['modules/*/test/**/*.test.js'];
+const unitTests = ['modules/gilded_rose/test/*.test.js']
+
+let testFiles = allTestFiles;
+function unitTest() {
+  testFiles = unitTests
+}
+function allTest() {
+  testFiles = allTestFiles
+}
 
 function test() {
   // let { app, db } = getServer().getInstance();
@@ -17,6 +26,7 @@ function test() {
       compilers: 'js:babel-core/register'
     }));
 }
+
 
 function server() {
   return getServer().getInstance();
@@ -33,10 +43,16 @@ function coverage(done) {
     });
 }
 
+gulp.task('type:all', allTest);
+gulp.task('type:unit', unitTest);
+gulp.task('test', test);
 gulp.task('server', server);
 gulp.task('test', test);
 gulp.task('coverage', coverage);
 gulp.task('exit', () => { getServer().getInstance().close(); process.exit(); });
-gulp.task('t:s', done => {
-  runSequence('server', 'test', 'exit', done);
+gulp.task('test:all', done => {
+  runSequence('type:all', 'server', 'test', 'exit', done);
+});
+gulp.task('test:unit', done => {
+  runSequence('type:unit', 'coverage', done);
 });

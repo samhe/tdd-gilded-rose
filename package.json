@@ -4,7 +4,8 @@
   "description": "ttd scripts",
   "main": "index.js",
   "scripts": {
-    "test": "gulp t:s",
+    "test": "gulp test:unit",
+    "test-all": "gulp test:all",
     "coverage": "gulp coverage"
   },
   "author": "sam.he@cargosmart.com",
