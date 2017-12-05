@@ -22,4 +22,3 @@ addons:
     organization: "samhe-github" # the key of the org you chose at step #3
 script:
   - yarn install && npm run test
-  - sonar-scanner

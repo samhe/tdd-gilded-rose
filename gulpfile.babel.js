@@ -5,6 +5,7 @@ import { Instrumenter } from 'isparta';
 import runSequence from 'run-sequence';
 
 import { getServer } from './modules/_express/server/server';
+import sonarqubeScanner from 'sonarqube-scanner';
 
 const srcFiles = ['modules/*/server/**/*.js'];
 const allTestFiles = ['modules/*/test/**/*.test.js'];
@@ -43,16 +44,31 @@ function coverage(done) {
     });
 }
 
+function codeScan(done) {
+  sonarqubeScanner({
+    serverUrl : 'https://sonarcloud.io',
+    token : process.env.SONAR_TOKEN,
+    options : {
+      'sonar.organization': 'samhe-github',
+      'sonar.sources': '.',
+      'sonar.inclusions': 'modules/*/**/*.js',
+      'sonar.exclusions': 'modules/*/test/**/*',
+      'sonar.javascript.lcov.reportPaths': 'coverage/**/lcov.info'
+    }
+  }, done);
+}
+
 gulp.task('type:all', allTest);
 gulp.task('type:unit', unitTest);
 gulp.task('test', test);
 gulp.task('server', server);
 gulp.task('test', test);
 gulp.task('coverage', coverage);
+gulp.task('scan', codeScan);
 gulp.task('exit', () => { getServer().getInstance().close(); process.exit(); });
 gulp.task('test:all', done => {
   runSequence('type:all', 'server', 'test', 'exit', done);
 });
 gulp.task('test:unit', done => {
-  runSequence('type:unit', 'coverage', done);
+  runSequence('type:unit', 'coverage', 'scan', done);
 });
