@@ -50,8 +50,8 @@ function codeScan(done) {
     token : process.env.SONAR_TOKEN,
     options : {
       'sonar.organization': 'samhe-github',
-      'sonar.projectKey': ' tdd-examples-nodejs',
-      'sonar.projectName': ' tdd-examples-nodejs',
+      // 'sonar.projectKey': ' tdd-examples-nodejs',
+      // 'sonar.projectName': ' tdd-examples-nodejs',
       'sonar.sources': '.',
       'sonar.inclusions': 'modules/*/**/*.js',
       'sonar.exclusions': 'modules/*/test/**/*',
