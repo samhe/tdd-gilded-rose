@@ -53,8 +53,8 @@ function codeScan(done) {
       'sonar.organization': 'samhe-github',
       'sonar.sources': '.',
       'sonar.inclusions': 'modules/*/**/*.js',
-      'sonar.exclusions': 'modules/*/test/**/*',
-      'sonar.javascript.lcov.reportPaths': 'coverage/**/lcov.info'
+      'sonar.exclusions': 'modules/*/test/**',
+      'sonar.javascript.lcov.reportPaths': 'coverage/lcov.info'
     }
   }, done);
 }
