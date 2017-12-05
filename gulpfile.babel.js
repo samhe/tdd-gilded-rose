@@ -20,7 +20,6 @@ function allTest() {
 }
 
 function test() {
-  // let { app, db } = getServer().getInstance();
   return gulp.src(testFiles)
     .pipe(mocha({
       reporter: 'spec',
@@ -45,11 +44,14 @@ function coverage(done) {
 }
 
 function codeScan(done) {
+  console.log(`env to scan is ${process.env.SONAR_TOKEN}`);
   sonarqubeScanner({
     serverUrl : 'https://sonarcloud.io',
     token : process.env.SONAR_TOKEN,
     options : {
       'sonar.organization': 'samhe-github',
+      'sonar.projectKey': ' tdd-examples-nodejs',
+      'sonar.projectName': ' tdd-examples-nodejs',
       'sonar.sources': '.',
       'sonar.inclusions': 'modules/*/**/*.js',
       'sonar.exclusions': 'modules/*/test/**/*',
