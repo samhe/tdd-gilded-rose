@@ -13,7 +13,6 @@ notifications:
     on_success: change # default: change
     on_failure: always # default: always
 
-cache: yarn
-  yarn: true
+cache:
   directories:
     - node_modules
